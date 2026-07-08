@@ -251,6 +251,24 @@
     .q .answer{margin-left:-40px;margin-right:-42px}
     .answer{padding:11px 12px}
   }
+  /* ── автоскрытие панели ── */
+  .toolbar{transition:transform .25s ease, box-shadow .25s ease}
+  .toolbar.offscreen{transform:translateY(-130%);box-shadow:none}
+  @media (prefers-reduced-motion:reduce){.toolbar{transition:none}}
+
+  /* ── читаемость ответов ── */
+  .answer{font-size:15px}
+  .answer p{line-height:1.66;margin:0 0 10px}
+  .answer code.ic{
+    background:var(--code-bg);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:0 5px;
+    font-size:12.8px;
+    white-space:normal;
+    overflow-wrap:anywhere;
+  }
+  .answer p b{color:var(--blue)}
 </style>
 </head>
 <body>
@@ -259,7 +277,7 @@
   <header class="head">
     <div class="eyebrow">конспект · python backend · собеседования · рф · 2026</div>
     <h1><span class="mark">Топ-100 вопросов</span><br>к Python-собесу</h1>
-    <p class="sub">Отсортированы по частоте на реальных собеседованиях джун / джун+, к каждому — развёрнутый ответ и код. Правило: сначала отвечай <b>вслух сам</b>, потом открывай ответ и сверяйся. Не сошлось — пометь и вернись через три дня.</p>
+    <p class="sub">100 вопросов с реальных собеседований Python-разработчиков уровня джун и джун+, по частоте. У каждого — <b>развёрнутый ответ и пример кода</b>. Сначала ответь сам, потом сверься и отметь разобранное.</p>
     <div class="progress">
       <div class="progress-track"><div class="progress-fill" id="pfill"></div></div>
       <div class="progress-label"><b id="pdone">0</b> из 100 разобрано</div>
@@ -293,7 +311,7 @@
   </main>
 
   <footer>
-    <span>сначала вслух сам — потом ответ · возврат через 3 дня</span>
+    <span>сначала ответь сам — потом сверяйся</span>
     <span>python backend · 2026</span>
   </footer>
 </div>
@@ -1371,7 +1389,13 @@ const state = {
 
 const $ = s => document.querySelector(s);
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-const fmt = t => esc(t).split(/\n{2,}/).map(p=>"<p>"+p.replace(/\n/g,"<br>")+"</p>").join("");
+const CODEISH = /(@?[A-Za-z_][\w.]*\((?:[^()]|\([^()]*\))*\)|__[A-Za-z_]\w*__|@[A-Za-z_][\w.]*|[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+|\b[A-Za-z]\w*_[A-Za-z_]\w*\b)/g;
+const fmt = t => esc(t).split(/\n{2,}/).map(p=>{
+  p = p.replace(CODEISH, m => '<code class="ic">' + m + '</code>');
+  p = p.replace(/^([А-ЯЁA-Z][^:<]{1,44}):\s/, "<b>$1:</b> ");
+  p = p.replace(/\s+(?=\d\)\s)/g, "<br>");
+  return "<p>" + p.replace(/\n/g, "<br>") + "</p>";
+}).join("");
 
 function saveDone(){ store.set("py100.done", JSON.stringify([...state.done])); }
 
@@ -1496,6 +1520,16 @@ function updateProgress(){
   $("#pdone").textContent = d;
   $("#pfill").style.width = d + "%";
 }
+
+/* панель прячется при листании вниз, возвращается при листании вверх */
+let lastY = window.scrollY;
+window.addEventListener("scroll", ()=>{
+  const y = window.scrollY;
+  const tb = document.querySelector(".toolbar");
+  if (y > lastY + 8 && y > 250) tb.classList.add("offscreen");
+  else if (y < lastY - 8 || y < 120) tb.classList.remove("offscreen");
+  lastY = y;
+}, {passive:true});
 
 $("#search").addEventListener("input", e=>{ state.search = e.target.value; render(); });
 $("#sort").addEventListener("change", e=>{ state.sort = e.target.value; render(); });

@@ -1,5 +1,5 @@
 /* Py100 service worker: офлайн-режим */
-const CACHE = "py100-v3";
+const CACHE = "py100-v4";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", e => {
