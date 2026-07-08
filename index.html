@@ -234,6 +234,23 @@
     .check{width:30px;height:30px}
     .shown-count{margin-left:0;width:100%}
   }
+  /* ── мобильные правки: ширина и отступы ── */
+  body{overflow-x:clip}
+  .q-text,.answer{overflow-wrap:anywhere}
+  .answer pre{max-width:100%}
+  @media(max-width:640px){
+    :root{--cell:24px}
+    body::before{left:12px}
+    .page{padding-left:32px;padding-right:12px}
+    .head{padding-top:36px}
+    .toolbar{padding:10px 12px}
+  }
+  @media(max-width:560px){
+    .q{grid-template-columns:32px 1fr 34px;gap:8px}
+    .q-num{font-size:11px}
+    .q .answer{margin-left:-40px;margin-right:-42px}
+    .answer{padding:11px 12px}
+  }
 </style>
 </head>
 <body>
