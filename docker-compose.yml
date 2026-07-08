@@ -1,0 +1,6 @@
+services:
+  py100:
+    build: .
+    ports:
+      - "8080:80"
+    restart: unless-stopped

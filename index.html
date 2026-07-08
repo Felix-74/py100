@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Топ-100 вопросов к Python-собесу · 2026</title>
+<meta name="description" content="100 самых частых вопросов с собеседований Python-разработчика в России: развёрнутые ответы, примеры кода, фильтры и трекинг прогресса.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Podkova:wght@500;700;800&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#2A4BC0">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<style>
+  :root{
+    --paper:#F6F5F0;
+    --grid:rgba(42,75,192,.075);
+    --ink:#20283A;
+    --ink-soft:#5A6275;
+    --blue:#2A4BC0;
+    --blue-soft:rgba(42,75,192,.08);
+    --red:#C2453B;
+    --amber:#B9761D;
+    --green:#2E7D4F;
+    --gray:#767E8E;
+    --hl:#FFE97A;
+    --line:rgba(32,40,58,.14);
+    --code-bg:#EEF1FB;
+    --cell:28px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition:none!important;animation:none!important}
+  }
+  body{
+    font-family:'Golos Text',system-ui,sans-serif;
+    color:var(--ink);
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:var(--cell) var(--cell);
+    min-height:100vh;
+    line-height:1.5;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    top:0;bottom:0;
+    left:clamp(18px,7vw,84px);
+    width:2px;
+    background:rgba(194,69,59,.5);
+    z-index:0;
+    pointer-events:none;
+  }
+  .page{
+    position:relative;
+    z-index:1;
+    max-width:880px;
+    margin:0 auto;
+    padding:0 20px 96px calc(clamp(18px,7vw,84px) + 24px);
+  }
+  @media(max-width:640px){
+    .page{padding-left:calc(clamp(18px,7vw,84px) + 14px);padding-right:14px}
+  }
+
+  .head{padding:56px 0 8px}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--blue);
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Podkova',serif;
+    font-weight:800;
+    font-size:clamp(34px,6.4vw,58px);
+    line-height:1.06;
+    letter-spacing:-.01em;
+  }
+  h1 .mark{
+    background:linear-gradient(to top,var(--hl) 0 42%,transparent 42%);
+    padding:0 .08em;
+  }
+  .sub{max-width:56ch;margin-top:16px;color:var(--ink-soft);font-size:16px}
+  .sub b{color:var(--ink);font-weight:600}
+
+  .progress{margin-top:26px;max-width:520px}
+  .progress-track{height:16px;border:2px solid var(--ink);border-radius:3px;background:#fff;overflow:hidden}
+  .progress-fill{height:100%;width:0%;background:repeating-linear-gradient(-45deg,var(--blue) 0 8px,#3f5fd3 8px 16px);transition:width .35s ease}
+  .progress-label{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--ink-soft);margin-top:7px}
+  .progress-label b{color:var(--ink)}
+
+  .toolbar{
+    position:sticky;top:0;z-index:10;
+    margin-top:30px;padding:14px 16px;
+    background:rgba(246,245,240,.92);
+    backdrop-filter:blur(6px);
+    border:1.5px solid var(--ink);
+    border-radius:8px;
+    box-shadow:3px 3px 0 rgba(32,40,58,.16);
+  }
+  .toolbar-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .toolbar-row + .toolbar-row{margin-top:10px}
+  .search{
+    flex:1 1 240px;
+    font-family:'JetBrains Mono',monospace;font-size:13.5px;color:var(--ink);
+    padding:9px 12px;border:1.5px solid var(--line);border-radius:6px;background:#fff;outline:none;
+  }
+  .search:focus-visible{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
+  .select{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;
+    padding:9px 10px;border:1.5px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);cursor:pointer;
+  }
+  .select:focus-visible{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft);outline:none}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{
+    font-family:'JetBrains Mono',monospace;font-size:12px;
+    padding:6px 11px;border:1.5px solid var(--line);border-radius:999px;
+    background:#fff;color:var(--ink-soft);cursor:pointer;transition:all .15s ease;user-select:none;
+  }
+  .chip:hover{border-color:var(--blue);color:var(--blue)}
+  .chip:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .chip .cnt{opacity:.65;margin-left:4px}
+  .toggle-done{
+    display:flex;align-items:center;gap:7px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-soft);
+    cursor:pointer;user-select:none;
+  }
+  .toggle-done input{accent-color:var(--blue);width:15px;height:15px;cursor:pointer}
+  .shown-count{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-soft)}
+
+  .group-head{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--red);
+    margin:42px 0 6px;display:flex;align-items:baseline;gap:10px;
+  }
+  .group-head::after{content:"";flex:1;height:1px;background:var(--line)}
+  .group-head .g-sub{color:var(--ink-soft);letter-spacing:0;text-transform:none;font-size:12px}
+
+  .qlist{list-style:none}
+  .q{
+    display:grid;grid-template-columns:52px 1fr 40px;gap:12px;
+    padding:15px 4px 15px 0;border-bottom:1px dashed var(--line);align-items:start;
+  }
+  .q-num{
+    font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+    color:var(--blue);padding-top:3px;text-align:right;
+  }
+  .q-main{cursor:pointer;min-width:0}
+  .q-text{
+    font-size:16px;font-weight:500;transition:background .15s ease;display:inline;
+    box-decoration-break:clone;-webkit-box-decoration-break:clone;
+  }
+  .q-main:hover .q-text{background:linear-gradient(to top,rgba(255,233,122,.75) 0 45%,transparent 45%)}
+  .q-main:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:3px}
+  .q-meta{display:flex;gap:8px;align-items:center;margin-top:7px;flex-wrap:wrap}
+  .tag{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);
+    border:1px solid var(--line);border-radius:4px;padding:2px 7px;background:#fff;
+  }
+  .stamp{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;
+    letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;
+    border:1.5px solid currentColor;border-radius:4px;transform:rotate(-1.6deg);background:#fff;
+  }
+  .stamp.bA{color:var(--red)}
+  .stamp.bB{color:var(--amber)}
+  .stamp.bC{color:var(--blue)}
+  .stamp.bD{color:var(--gray)}
+
+  .answer{
+    display:none;
+    margin-top:12px;padding:13px 16px;
+    background:#fff;border-left:3px solid var(--blue);
+    border-radius:0 6px 6px 0;
+    box-shadow:2px 2px 0 rgba(32,40,58,.08);
+    font-size:14.5px;
+  }
+  .answer .a-label{
+    display:block;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--blue);
+    margin-bottom:7px;
+  }
+  .answer p{margin:0 0 9px}
+  .answer p:last-child{margin-bottom:0}
+  .answer pre{
+    margin:10px 0 2px;padding:11px 13px;
+    background:var(--code-bg);border:1px solid var(--line);border-radius:6px;
+    overflow-x:auto;
+  }
+  .answer code{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.6;color:var(--ink);
+    white-space:pre;
+  }
+  .q.open .answer{display:block}
+
+  .check{
+    width:32px;height:32px;border:1.5px solid var(--line);border-radius:6px;
+    background:#fff;cursor:pointer;font-size:17px;line-height:1;color:transparent;
+    transition:all .15s ease;justify-self:end;
+  }
+  .check:hover{border-color:var(--green);color:rgba(46,125,79,.35)}
+  .check:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .q.done .check{background:var(--green);border-color:var(--green);color:#fff}
+  .q.done .q-text{color:var(--ink-soft)}
+  .q.done .q-num{color:var(--ink-soft)}
+
+  .empty{padding:60px 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:13.5px;color:var(--ink-soft)}
+
+  footer{
+    margin-top:64px;padding-top:20px;border-top:1.5px solid var(--ink);
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--ink-soft);
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+
+  @media(max-width:560px){
+    .q{grid-template-columns:40px 1fr 36px;gap:9px}
+    .q-num{font-size:12px}
+    .q-text{font-size:15px}
+    .shown-count{margin-left:0;width:100%}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="head">
+    <div class="eyebrow">конспект · python backend · собеседования · рф · 2026</div>
+    <h1><span class="mark">Топ-100 вопросов</span><br>к Python-собесу</h1>
+    <p class="sub">Отсортированы по частоте на реальных собеседованиях джун / джун+, к каждому — развёрнутый ответ и код. Правило: сначала отвечай <b>вслух сам</b>, потом открывай ответ и сверяйся. Не сошлось — пометь и вернись через три дня.</p>
+    <div class="progress">
+      <div class="progress-track"><div class="progress-fill" id="pfill"></div></div>
+      <div class="progress-label"><b id="pdone">0</b> из 100 разобрано</div>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="toolbar-row">
+      <input class="search" id="search" type="search" placeholder="поиск: gil, декоратор, join…" aria-label="Поиск по вопросам">
+      <select class="select" id="sort" aria-label="Сортировка">
+        <option value="freq">по частоте</option>
+        <option value="topic">по темам</option>
+      </select>
+      <button class="chip" type="button" id="expandAll">развернуть все</button>
+    </div>
+    <div class="toolbar-row">
+      <div class="chips" id="blockChips" role="group" aria-label="Фильтр по частоте"></div>
+    </div>
+    <div class="toolbar-row">
+      <div class="chips" id="topicChips" role="group" aria-label="Фильтр по темам"></div>
+    </div>
+    <div class="toolbar-row">
+      <label class="toggle-done"><input type="checkbox" id="hideDone"> скрыть разобранные</label>
+      <div class="shown-count" id="shownCount"></div>
+    </div>
+  </div>
+
+  <main>
+    <div id="list"></div>
+  </main>
+
+  <footer>
+    <span>сначала вслух сам — потом ответ · возврат через 3 дня</span>
+    <span>python backend · 2026</span>
+  </footer>
+</div>
+
+<script>
+const TOPICS = ["Core","ООП","Коллекции","Итераторы","Исключения","Конкурентность","SQL","Web","Инфра","Софт"];
+const BLOCKS = {
+  A:{name:"Блок A",label:"почти всегда",sub:"№ 1–20 · спросят почти на каждом собесе"},
+  B:{name:"Блок B",label:"очень часто",sub:"№ 21–45"},
+  C:{name:"Блок C",label:"часто",sub:"№ 46–70"},
+  D:{name:"Блок D",label:"периодически",sub:"№ 71–100 · чаще на джун+/мидл"}
+};
+
+const Q = [
+{n:1,t:"Core",b:"A",q:"Изменяемые и неизменяемые типы. Почему это важно?",
+a:`Неизменяемые: int, float, str, tuple, bool, frozenset, bytes. Изменяемые: list, dict, set, bytearray. «Изменение» неизменяемого объекта на самом деле создаёт новый объект — id() меняется.
+
+Почему важно: 1) только hashable-объекты (как правило, неизменяемые) могут быть ключами словаря и элементами множества; 2) изменяемый объект, переданный в функцию, можно изменить внутри неё — и это видно снаружи; 3) изменяемое значение по умолчанию — классическая ловушка (вопрос №2).`,
+code:`x = "abc"
+print(id(x))
+x += "d"        # создан НОВЫЙ объект
+print(id(x))    # id изменился
+
+lst = [1, 2]
+print(id(lst))
+lst += [3]      # изменение на месте
+print(id(lst))  # id тот же`},
+
+{n:2,t:"Core",b:"A",q:"Ловушка: изменяемый объект как значение по умолчанию аргумента (def f(x=[])). Что будет и почему?",
+a:`Значения по умолчанию вычисляются один раз — в момент выполнения def — и хранятся в f.__defaults__. Один и тот же список разделяется всеми вызовами, поэтому данные «протекают» между ними.
+
+Правильный паттерн: None как маркер и создание объекта внутри функции.`,
+code:`def bad(item, box=[]):
+    box.append(item)
+    return box
+
+bad(1)   # [1]
+bad(2)   # [1, 2]  <- сюрприз
+
+def good(item, box=None):
+    if box is None:
+        box = []
+    box.append(item)
+    return box`},
+
+{n:3,t:"Коллекции",b:"A",q:"list vs tuple: отличия, когда что использовать?",
+a:`list — изменяемая последовательность: append, insert, remove, растёт с запасом памяти. tuple — неизменяемая: создали и всё; занимает меньше памяти, создаётся быстрее, может быть ключом словаря (если все элементы hashable).
+
+Семантика: кортеж — фиксированная структура из разнородных полей (координаты, запись), список — однородная коллекция переменной длины. Нюанс со звёздочкой: если внутри кортежа лежит список, кортеж перестаёт быть hashable, а сам список внутри менять можно (вопрос №90).`,
+code:`point = (55.16, 61.40)      # структура
+users = ["ann", "bob"]      # коллекция
+
+d = {point: "Челябинск"}    # tuple — ключ, ок
+d[["a"]] = 1                # TypeError: unhashable type: 'list'`},
+
+{n:4,t:"Коллекции",b:"A",q:"Как устроен dict внутри?",
+a:`Хеш-таблица: hash(key) определяет слот; при коллизии CPython пробует следующие слоты (open addressing). При заполнении примерно на 2/3 таблица расширяется, и все ключи перехешируются. Отсюда требования: ключ hashable, а __eq__ и __hash__ согласованы — равные объекты обязаны иметь равный хеш.
+
+Средняя сложность поиска, вставки и удаления — O(1). С Python 3.7 гарантирован порядок вставки (компактное представление: массив записей + индексная таблица).`,
+code:`# контракт hashable:
+# a == b  =>  hash(a) == hash(b)
+
+d = {}
+d["key"] = 1     # hash("key") -> номер слота
+"key" in d       # O(1) в среднем`},
+
+{n:5,t:"Core",b:"A",q:"is vs ==. Почему 256 is 256 → True, а с 257 — не факт?",
+a:`== вызывает __eq__ и сравнивает значения; is сравнивает идентичность — один ли это объект в памяти (id). CPython кеширует малые целые от −5 до 256 и интернирует простые строки, поэтому is для них «случайно» срабатывает — это деталь реализации, полагаться нельзя.
+
+Железное правило: значения сравниваем через ==, а is оставляем для синглтонов: None, True, False, сентинелы.`,
+code:`a, b = 256, 256
+a is b          # True (кеш малых int)
+
+a, b = 1000, 10**3
+a == b          # True
+a is b          # False (в общем случае)
+
+if x is None:   # правильный способ
+    ...`},
+
+{n:6,t:"Core",b:"A",q:"Shallow copy vs deep copy. Когда какая нужна?",
+a:`Shallow copy (copy.copy, list(x), x[:], dict.copy) создаёт новый контейнер, но вложенные объекты остаются общими: изменил вложенный список в копии — изменился и в оригинале. Deep copy (copy.deepcopy) рекурсивно копирует всю структуру и корректно обрабатывает циклические ссылки (через memo-словарь).
+
+deepcopy дороже; нужен только когда есть вложенные изменяемые объекты, которые будут меняться независимо.`,
+code:`import copy
+
+a = [[1, 2], [3]]
+b = copy.copy(a)        # shallow
+b[0].append(99)
+print(a)                # [[1, 2, 99], [3]] — вложенный общий!
+
+c = copy.deepcopy(a)
+c[0].append(7)
+print(a)                # без изменений`},
+
+{n:7,t:"Core",b:"A",q:"Как передаются аргументы в функцию: по значению или по ссылке?",
+a:`Ни то, ни другое в терминах C++ — это call by object reference: в функцию попадает ссылка на тот же объект. Мутирующие операции над изменяемым объектом видны снаружи. А присваивание параметру нового значения лишь перебрасывает локальное имя на другой объект — снаружи ничего не меняется.`,
+code:`def f(lst, n):
+    lst.append(4)   # мутация — видна снаружи
+    n = 100         # переприсваивание имени — нет
+
+data, num = [1, 2, 3], 1
+f(data, num)
+print(data, num)    # [1, 2, 3, 4] 1`},
+
+{n:8,t:"Core",b:"A",q:"*args и **kwargs. Порядок параметров в сигнатуре?",
+a:`*args собирает лишние позиционные аргументы в кортеж, **kwargs — лишние именованные в словарь. Полный порядок в сигнатуре: обычные позиционные → *args (или голая *) → keyword-only → **kwargs. Символы / и * делают параметры только-позиционными и только-именованными.
+
+Те же звёздочки при вызове — распаковка коллекций в аргументы.`,
+code:`def f(a, b=1, *args, key, **kwargs):
+    print(a, b, args, key, kwargs)
+
+f(1, 2, 3, 4, key="x", extra=5)
+# 1 2 (3, 4) x {'extra': 5}
+
+params = {"b": 2, "key": "x"}
+f(1, **params)      # распаковка при вызове`},
+
+{n:9,t:"Конкурентность",b:"A",q:"Что такое GIL и на что он влияет?",
+a:`Global Interpreter Lock — мьютекс CPython: в каждый момент байткод выполняет только один поток, даже на 16 ядрах. Введён ради простоты и безопасности управления памятью — подсчёт ссылок не потокобезопасен.
+
+Следствия: потоки не ускоряют CPU-bound код (могут и замедлить из-за переключений); на блокирующем IO (сеть, диск, sleep) GIL освобождается, поэтому для IO потоки работают. CPU-bound параллелят процессами. С 3.13 существует экспериментальная free-threaded сборка без GIL (вопрос №88) — упомянуть её на собесе всегда плюс.`},
+
+{n:10,t:"Конкурентность",b:"A",q:"Потоки vs процессы vs asyncio: что брать для IO-bound и CPU-bound?",
+a:`Выбор определяется типом нагрузки.
+
+CPU-bound (вычисления, парсинг, обработка изображений) → multiprocessing / ProcessPoolExecutor: обходит GIL отдельными процессами. IO-bound, десятки задач → потоки (ThreadPoolExecutor): просто и совместимо с любым блокирующим кодом. IO-bound, сотни и тысячи одновременных соединений → asyncio: корутины на порядки дешевле потоков, но весь стек должен быть асинхронным (aiohttp, asyncpg).
+
+Уточнение, которое любят на собесе: потоки — общая память (нужны локи), процессы — раздельная (данные копируются через pickle).`},
+
+{n:11,t:"Итераторы",b:"A",q:"Итератор vs итерируемый объект. Протокол итерации?",
+a:`Iterable — то, по чему можно пройтись: имеет __iter__, возвращающий итератор (list, dict, str, файл). Iterator — объект с __next__ (отдаёт следующий элемент или бросает StopIteration) и __iter__, возвращающим self. Цикл for внутри делает iter(obj) и зовёт next() до StopIteration.
+
+Итератор одноразовый: исчерпал — второй проход не даст ничего. Список можно обходить сколько угодно раз, генератор — один.`,
+code:`nums = [1, 2, 3]     # iterable
+it = iter(nums)      # iterator
+next(it)   # 1
+next(it)   # 2
+list(it)   # [3] — дочитали остаток
+list(it)   # []  — исчерпан`},
+
+{n:12,t:"Итераторы",b:"A",q:"Генераторы: yield vs return, зачем нужны?",
+a:`Функция с yield при вызове не выполняется, а возвращает генератор — итератор, который лениво отдаёт значения. На каждом next() код выполняется до следующего yield и «замирает», сохраняя все локальные переменные. return внутри генератора завершает его (StopIteration).
+
+Зачем: обработка больших данных без загрузки в память, бесконечные последовательности, пайплайны обработки.`,
+code:`def read_batches(path, size=1000):
+    batch = []
+    with open(path) as f:
+        for line in f:
+            batch.append(line)
+            if len(batch) == size:
+                yield batch
+                batch = []
+    if batch:
+        yield batch
+
+for batch in read_batches("big.log"):
+    process(batch)   # файл любого размера, память O(size)`},
+
+{n:13,t:"Core",b:"A",q:"Декоратор: что это, как написать? Зачем functools.wraps?",
+a:`Декоратор — функция, которая принимает функцию и возвращает новую (обычно обёртку с добавленным поведением: логирование, замер времени, кеш, проверка прав). Запись @deco — сахар для f = deco(f). Без functools.wraps обёртка теряет __name__ и __doc__ оригинала — ломаются интроспекция, отладка и некоторые фреймворки.
+
+Написать декоратор на собесе просят почти всегда — довести до автоматизма.`,
+code:`import functools, time
+
+def timer(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.perf_counter()
+        result = func(*args, **kwargs)
+        print(func.__name__, time.perf_counter() - start)
+        return result
+    return wrapper
+
+@timer
+def slow():
+    time.sleep(0.5)`}
+,
+{n:14,t:"Core",b:"A",q:"Что такое замыкание (closure)?",
+a:`Замыкание — функция, которая «захватила» переменные из объемлющей функции и сохраняет доступ к ним после её завершения. Ссылки хранятся в __closure__. Захватывается переменная, а не её значение — отсюда классическая ловушка с lambda в цикле (вопрос №91). Для перезаписи захваченной переменной нужен nonlocal.
+
+Замыкания — механизм, на котором построены декораторы.`,
+code:`def counter():
+    count = 0
+    def inc():
+        nonlocal count
+        count += 1
+        return count
+    return inc
+
+c = counter()
+c(); c(); print(c())   # 3 — count живёт между вызовами`},
+
+{n:15,t:"ООП",b:"A",q:"@classmethod vs @staticmethod vs обычный метод?",
+a:`Обычный метод получает экземпляр (self). @classmethod получает класс (cls) — главный кейс: альтернативные конструкторы (from_json, from_string), которые корректно работают и при наследовании, потому что cls — это реальный класс, у которого вызвали метод. @staticmethod не получает ничего — просто функция, положенная в неймспейс класса по смыслу.`,
+code:`class User:
+    def __init__(self, name):
+        self.name = name
+
+    @classmethod
+    def from_dict(cls, data):       # альтернативный конструктор
+        return cls(data["name"])    # cls: сработает и в наследнике
+
+    @staticmethod
+    def is_valid_name(name):
+        return bool(name.strip())`},
+
+{n:16,t:"ООП",b:"A",q:"__init__ vs __new__?",
+a:`__new__ — статический метод, который создаёт и возвращает экземпляр; вызывается первым и получает класс (cls). __init__ инициализирует уже созданный объект (получает self, ничего не возвращает). Если __new__ вернул не экземпляр cls, __init__ вообще не вызовется.
+
+Когда трогают __new__: синглтон, наследование от неизменяемых типов (str, tuple), кеширование экземпляров.`,
+code:`class Singleton:
+    _instance = None
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+print(Singleton() is Singleton())   # True`},
+
+{n:17,t:"ООП",b:"A",q:"MRO, множественное наследование, super()?",
+a:`MRO (Method Resolution Order) — порядок, в котором Python ищет атрибуты и методы по иерархии. Строится алгоритмом C3-линеаризации: ребёнок раньше родителей, порядок родителей — как в объявлении, без противоречий (иначе TypeError при создании класса). Смотреть: Cls.__mro__.
+
+Ключевая мысль: super() — это не «родитель», а следующий класс по MRO. Именно поэтому в ромбовидном наследовании каждый __init__ вызывается ровно один раз — если все звенья зовут super().`,
+code:`class A: pass
+class B(A): pass
+class C(A): pass
+class D(B, C): pass
+
+print([c.__name__ for c in D.__mro__])
+# ['D', 'B', 'C', 'A', 'object']`},
+
+{n:18,t:"ООП",b:"A",q:"Дандеры: __str__ vs __repr__, __eq__ и __hash__, __call__?",
+a:`__repr__ — однозначное представление для разработчика (в идеале — выражение, воссоздающее объект), __str__ — читабельное для пользователя; если __str__ не задан, используется __repr__. __call__ делает экземпляр вызываемым как функция.
+
+Важная связка: определил __eq__ — Python обнуляет __hash__, объект перестаёт быть hashable. Хочешь класть объекты в set или ключи dict — определяй оба, и равные объекты обязаны давать равный хеш.`,
+code:`class Money:
+    def __init__(self, amount, currency):
+        self.amount, self.currency = amount, currency
+    def __repr__(self):
+        return f"Money({self.amount!r}, {self.currency!r})"
+    def __eq__(self, other):
+        return (self.amount, self.currency) == (other.amount, other.currency)
+    def __hash__(self):
+        return hash((self.amount, self.currency))`},
+
+{n:19,t:"Core",b:"A",q:"Как работает сборка мусора в Python?",
+a:`Основной механизм — подсчёт ссылок: у каждого объекта есть счётчик; упал до нуля — память освобождается немедленно. Слабое место — циклические ссылки (a ссылается на b, b на a): счётчики никогда не обнулятся. Их добирает модуль gc: обходит объекты по трём поколениям, молодые проверяются чаще.
+
+Частое уточнение: del x не удаляет объект — только уменьшает счётчик ссылок на единицу.`,
+code:`import sys
+a = []
+print(sys.getrefcount(a))   # 2: имя a + аргумент функции
+
+a = {}; b = {"a": a}; a["b"] = b   # цикл ссылок
+del a, b    # счётчики не нулевые — добирает gc`},
+
+{n:20,t:"Core",b:"A",q:"List/dict/set comprehensions и генераторные выражения?",
+a:`Компактный синтаксис построения коллекций: [выражение for x in iterable if условие]. Есть для списков, словарей и множеств. «Кортежного» comprehension не существует: (x for x in ...) — это генераторное выражение, ленивое, не строит коллекцию в памяти.
+
+Хороший тон: не больше одного-двух for/if в одном comprehension — дальше обычный цикл читабельнее.`,
+code:`squares = [x*x for x in range(10) if x % 2 == 0]
+index   = {u.id: u for u in users}
+uniq    = {word.lower() for word in words}
+total   = sum(x*x for x in range(10**6))  # генератор: без списка в памяти`},
+
+{n:21,t:"ООП",b:"B",q:"property: зачем, как сделать сеттер и геттер?",
+a:`@property превращает метод в вычисляемый атрибут: снаружи — обычное обращение obj.x, внутри — логика. @x.setter добавляет контроль при присваивании, @x.deleter — при удалении.
+
+Главная ценность: можно начать с простого атрибута, а валидацию добавить потом, не меняя интерфейс класса и не переписывая вызывающий код.`,
+code:`class Account:
+    def __init__(self, balance):
+        self._balance = balance
+
+    @property
+    def balance(self):
+        return self._balance
+
+    @balance.setter
+    def balance(self, value):
+        if value < 0:
+            raise ValueError("Баланс не может быть отрицательным")
+        self._balance = value`},
+
+{n:22,t:"ООП",b:"B",q:"Абстрактные классы (ABC), @abstractmethod. Зачем?",
+a:`abc.ABC + @abstractmethod фиксируют контракт: класс с нереализованными абстрактными методами нельзя инстанцировать — TypeError на этапе создания объекта, а не при вызове метода где-то глубоко в рантайме. Наследник обязан реализовать все абстрактные методы.
+
+Плюс на собесе — упомянуть альтернативу: typing.Protocol (структурная типизация — «утиный» контракт, который проверяет mypy без наследования).`,
+code:`from abc import ABC, abstractmethod
+
+class PaymentMethod(ABC):
+    @abstractmethod
+    def process(self, amount): ...
+
+class CardPayment(PaymentMethod):
+    def process(self, amount):
+        return f"charged {amount}"
+
+PaymentMethod()   # TypeError: Can't instantiate abstract class`},
+
+{n:23,t:"ООП",b:"B",q:"Наследование vs композиция. Когда что?",
+a:`Наследование — отношение «является» (is-a): CardPayment является PaymentMethod. Композиция — «содержит» (has-a): Order содержит список позиций и объект Payment. Наследование даёт полиморфизм и переиспользование, но жёстко связывает: изменения в базовом классе ломают наследников, глубокие иерархии тяжело поддерживать.
+
+Эвристика для ответа: наследоваться ради интерфейса и подстановки (LSP), для переиспользования кода предпочитать композицию. Фраза «composition over inheritance» с обоснованием звучит по-взрослому.`},
+
+{n:24,t:"ООП",b:"B",q:"Инкапсуляция: _, __, name mangling. Есть ли приватность в Python?",
+a:`Настоящих приватных атрибутов в Python нет. Один подчерк (_x) — соглашение «внутреннее, не трогай». Два подчерка (__x) — name mangling: имя превращается в _ClassName__x; это защита не от программиста, а от случайного конфликта имён при наследовании. Доступ снаружи всё равно возможен.
+
+Философия языка: «we are all consenting adults» — инкапсуляция на уровне договорённостей, а контроль доступа — через property.`,
+code:`class A:
+    def __init__(self):
+        self._internal = 1
+        self.__mangled = 2
+
+a = A()
+print(a._internal)     # можно, но не принято
+print(a._A__mangled)   # вот куда «спрятался» __mangled`},
+
+{n:25,t:"ООП",b:"B",q:"Duck typing?",
+a:`«Если объект крякает как утка — работаем с ним как с уткой»: важно поведение (наличие нужных методов), а не тип и не наследование. len() работает со всем, у чего есть __len__; for — со всем, у чего есть __iter__; файл можно подменить io.StringIO.
+
+Это основа полиморфизма в Python: функции не проверяют isinstance на каждом шагу, а просто вызывают методы. Формализация «утиных» контрактов для статического анализа — typing.Protocol.`}
+,
+{n:26,t:"ООП",b:"B",q:"__slots__: что даёт, что ломает?",
+a:`__slots__ заменяет per-instance словарь __dict__ фиксированным набором атрибутов: заметная экономия памяти на миллионах объектов и чуть более быстрый доступ. Цена: нельзя добавить атрибут «на лету», аккуратнее с наследованием (слоты складываются, а наследник без slots вернёт __dict__), не дружит с некоторыми библиотеками.
+
+Плюс — знать, что в dataclass есть slots=True (с 3.10).`,
+code:`class Point:
+    __slots__ = ("x", "y")
+    def __init__(self, x, y):
+        self.x, self.y = x, y
+
+p = Point(1, 2)
+p.z = 3    # AttributeError: 'Point' object has no attribute 'z'`},
+
+{n:27,t:"Core",b:"B",q:"Контекстные менеджеры: with, __enter__/__exit__, contextlib?",
+a:`with гарантирует освобождение ресурса даже при исключении: на входе вызывается __enter__, на выходе — __exit__(exc_type, exc, tb). Если __exit__ вернёт True — исключение подавляется. Второй способ — генератор с @contextlib.contextmanager: код до yield — вход, после (в finally) — выход.
+
+Типовые кейсы: файлы, локи, транзакции, временное изменение состояния, замер времени.`,
+code:`from contextlib import contextmanager
+import time
+
+@contextmanager
+def timer(label):
+    start = time.perf_counter()
+    try:
+        yield
+    finally:
+        print(label, time.perf_counter() - start)
+
+with timer("query"):
+    do_work()`},
+
+{n:28,t:"Исключения",b:"B",q:"try/except/else/finally: порядок, когда нужен else?",
+a:`Порядок: выполняется try; было исключение — подходящий except; не было — else; finally — всегда, даже при return, break и неперехваченном исключении. Зачем else: держать в try минимум кода, чтобы случайно не поймать исключение из «успешной» ветки.
+
+Нюанс со звёздочкой: return внутри finally перекрывает и return из try, и само исключение — так писать нельзя.`,
+code:`try:
+    data = fetch()
+except TimeoutError:
+    retry()
+else:
+    process(data)    # только если fetch() прошёл без исключений
+finally:
+    close()          # всегда`},
+
+{n:29,t:"Исключения",b:"B",q:"Иерархия исключений. Свои исключения — как и зачем?",
+a:`Корень — BaseException; от него SystemExit, KeyboardInterrupt и Exception — предок всех «обычных» ошибок. Ловить стоит максимум Exception: голый except: заглатывает даже Ctrl+C. Свои исключения наследуют от Exception или от своего базового класса — это даёт семантику предметной области и возможность ловить только свои ошибки, не трогая чужие.`,
+code:`class PaymentError(Exception): ...
+class CurrencyMismatchError(PaymentError): ...
+
+try:
+    pay(order)
+except PaymentError as e:      # ловим всё «своё» разом
+    logger.warning("payment failed: %s", e)
+    raise                      # и пробрасываем дальше`},
+
+{n:30,t:"Коллекции",b:"B",q:"set и frozenset. Сложность операций?",
+a:`set — изменяемое множество уникальных hashable-элементов на хеш-таблице: проверка in, добавление, удаление — O(1) в среднем; поддерживает операции множеств: | (объединение), & (пересечение), - (разность). frozenset — неизменяемая версия: hashable, значит может быть ключом словаря и элементом другого множества.
+
+Типовой кейс: дедупликация и быстрая проверка принадлежности вместо списка.`,
+code:`allowed = frozenset({"admin", "editor"})
+if role in allowed: ...
+
+a = {1, 2, 3} & {2, 3, 4}    # {2, 3}
+uniq = list(dict.fromkeys(items))  # дедуп с сохранением порядка`},
+
+{n:31,t:"Коллекции",b:"B",q:"Сложность операций list/dict/set?",
+a:`list: доступ по индексу O(1); поиск in — O(n); append — O(1) амортизированно; insert и удаление в начале — O(n), потому что сдвигаются элементы. dict/set: поиск, вставка, удаление — O(1) в среднем (худший случай O(n) при вырожденных коллизиях).
+
+Выводы, которые ждут: проверка принадлежности — set/dict, а не list; очередь — collections.deque (O(1) с обоих концов), а не list.pop(0).`},
+
+{n:32,t:"Core",b:"B",q:"lambda, map/filter, sorted с key?",
+a:`lambda — безымянная функция из одного выражения; главный легитимный кейс — короткий key. map и filter ленивые, возвращают итераторы; в современном коде их чаще заменяет comprehension — читабельнее. sorted — стабильная сортировка (Timsort), key вызывается по одному разу на элемент.`,
+code:`users.sort(key=lambda u: (u.age, u.name))    # по двум полям
+
+from operator import attrgetter
+sorted(users, key=attrgetter("age"))          # то же, чуть быстрее
+
+names = [u.name for u in users if u.active]   # вместо map+filter`},
+
+{n:33,t:"Коллекции",b:"B",q:"Что такое hashable? Можно ли list сделать ключом словаря?",
+a:`Hashable — у объекта есть __hash__ со стабильным значением на время жизни и __eq__; равные объекты обязаны давать равный хеш. Все встроенные неизменяемые типы hashable; list, dict, set — нет. Поэтому list ключом словаря быть не может, а tuple — может, если все его элементы hashable.
+
+Экземпляры своих классов hashable по умолчанию (хеш от id), но перестают быть после определения __eq__ без __hash__ (вопрос №18).`},
+
+{n:34,t:"Core",b:"B",q:"Области видимости LEGB, global/nonlocal?",
+a:`Поиск имени идёт по областям: Local (внутри функции) → Enclosing (объемлющие функции) → Global (модуль) → Built-in. Читать внешние переменные можно свободно, но присваивание делает имя локальным для всей функции — отсюда UnboundLocalError. Для записи наружу: global (в модуль) и nonlocal (в объемлющую функцию).`,
+code:`x = 1
+def f():
+    print(x)   # UnboundLocalError!
+    x = 2      # из-за этой строки x локальна во ВСЕЙ f
+f()`},
+
+{n:35,t:"Конкурентность",b:"B",q:"async/await, event loop, корутины?",
+a:`async def объявляет корутину; её вызов не выполняет код, а создаёт объект-корутину, которую исполняет event loop. await — точка, где корутина отдаёт управление циклу, пока ждёт результата (сетевой ответ, таймер) — в это время выполняются другие задачи. Всё в одном потоке; выигрыш только на IO.
+
+Запуск: asyncio.run(main()); конкурентно: asyncio.gather / create_task (вопрос №60).`,
+code:`import asyncio, aiohttp
+
+async def fetch(session, url):
+    async with session.get(url) as resp:
+        return await resp.text()
+
+async def main():
+    async with aiohttp.ClientSession() as s:
+        pages = await asyncio.gather(*[fetch(s, u) for u in urls])
+
+asyncio.run(main())`},
+
+{n:36,t:"Конкурентность",b:"B",q:"Чем корутина отличается от потока?",
+a:`Поток переключает операционная система в произвольный момент (вытесняющая многозадачность) — поэтому нужны локи. Корутина уступает управление сама и только на await (кооперативная) — меньше гонок, но одна блокирующая операция вешает все задачи сразу.
+
+Память и стоимость: поток — порядка мегабайта на стек и дорогое переключение через ядро; корутина — сотни байт. Отсюда десятки тысяч одновременных соединений на одном процессе — недостижимо для потоков.`},
+
+{n:37,t:"Core",b:"B",q:"Type hints: зачем, Optional/Union, mypy?",
+a:`Аннотации типов: def f(x: int) -> str. Рантайм их не проверяет — это документация, статический анализ (mypy, pyright), автодополнение IDE и основа FastAPI/Pydantic. Современный синтаксис: int | None вместо Optional[int], list[int] вместо List[int] (с 3.9–3.10).
+
+Частое уточнение: «что такое Optional?» — это Union[X, None]; обязывает обработать случай None.`,
+code:`def find_user(user_id: int) -> "User | None": ...
+
+def parse(raw: str, sep: str = ",") -> list[int]:
+    return [int(x) for x in raw.split(sep)]`},
+
+{n:38,t:"ООП",b:"B",q:"dataclasses: что дают?",
+a:`@dataclass по аннотациям генерирует __init__, __repr__, __eq__ (и __lt__ и другие при order=True). frozen=True делает экземпляры неизменяемыми (и hashable), slots=True (3.10+) экономит память. Изменяемые значения по умолчанию — только через field(default_factory=list): обычный список в дефолте датакласс не пропустит — и правильно сделает (вопрос №2).`,
+code:`from dataclasses import dataclass, field
+
+@dataclass(frozen=True, slots=True)
+class Point:
+    x: float
+    y: float
+
+@dataclass
+class Cart:
+    items: list = field(default_factory=list)`},
+
+{n:39,t:"Core",b:"B",q:"Строки: неизменяемость, конкатенация vs join, f-strings?",
+a:`Строки неизменяемы: любая «модификация» создаёт новый объект. Конкатенация в цикле — O(n²): на каждой итерации копируется всё накопленное. Правильно: собрать части в список и склеить одним ''.join(). f-строки — самый быстрый и читаемый способ форматирования; внутри можно выражения и суффикс = для отладки.`,
+code:`# плохо: O(n^2)
+s = ""
+for word in words:
+    s += word
+
+# хорошо: O(n)
+s = "".join(words)
+
+name = "Igor"
+print(f"{name=}, {2 + 2=}")   # name='Igor', 2 + 2=4`},
+
+{n:40,t:"SQL",b:"B",q:"JOIN: INNER / LEFT / RIGHT / FULL — разница?",
+a:`INNER JOIN — только строки, у которых есть совпадение в обеих таблицах. LEFT JOIN — все строки левой таблицы + совпавшие из правой (иначе NULL). RIGHT — зеркально, FULL — обе стороны с NULL там, где пары нет.
+
+Классика собеса: «найди пользователей без заказов» — LEFT JOIN + WHERE o.id IS NULL.`,
+code:`-- пользователи и их заказы, включая тех, у кого заказов нет
+SELECT u.name, o.id
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id;
+
+-- только пользователи БЕЗ заказов
+SELECT u.name
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id
+WHERE o.id IS NULL;`},
+
+{n:41,t:"SQL",b:"B",q:"Индексы: как устроены, когда ускоряют, когда вредят?",
+a:`Индекс (обычно B-tree) — отсортированная структура «значение → строка»: поиск за O(log n) вместо полного скана таблицы. Ускоряет WHERE, JOIN, ORDER BY по индексированным колонкам. Цена: место на диске и замедление INSERT/UPDATE — индексы надо поддерживать.
+
+Когда не сработает: функция над колонкой (WHERE lower(email) = ...), ведущий % в LIKE, низкая селективность (флаг с двумя значениями). Проверка — EXPLAIN ANALYZE: Seq Scan против Index Scan.`,
+code:`CREATE INDEX idx_orders_user_id ON orders(user_id);
+
+EXPLAIN ANALYZE
+SELECT * FROM orders WHERE user_id = 42;
+-- Index Scan using idx_orders_user_id ...`},
+
+{n:42,t:"SQL",b:"B",q:"GROUP BY и HAVING. Чем HAVING отличается от WHERE?",
+a:`GROUP BY схлопывает строки в группы, к группам применяются агрегаты: COUNT, SUM, AVG, MIN, MAX. WHERE фильтрует строки ДО группировки, HAVING — группы ПОСЛЕ агрегации: в HAVING можно использовать агрегатные функции, в WHERE — нельзя.`,
+code:`-- клиенты с более чем 5 заказами за 2026 год
+SELECT user_id, COUNT(*) AS cnt
+FROM orders
+WHERE created_at >= '2026-01-01'   -- фильтр строк
+GROUP BY user_id
+HAVING COUNT(*) > 5;               -- фильтр групп`},
+
+{n:43,t:"SQL",b:"B",q:"Проблема N+1: что это и как чинить?",
+a:`Один запрос за списком объектов + по запросу за связанными данными на каждый объект в цикле = 1+N запросов вместо одного-двух. В коде выглядит невинно: обращение к order.user внутри for. Ловится логом SQL-запросов или django-debug-toolbar.
+
+Лечение: в Django — select_related (JOIN, для ForeignKey) и prefetch_related (второй запрос + склейка, для M2M); в SQLAlchemy — joinedload / selectinload.`,
+code:`# N+1:
+for order in Order.objects.all():
+    print(order.user.name)          # запрос на КАЖДОЙ итерации
+
+# исправлено:
+for order in Order.objects.select_related("user"):
+    print(order.user.name)          # один запрос с JOIN`},
+
+{n:44,t:"Web",b:"B",q:"REST: принципы, HTTP-методы, идемпотентность?",
+a:`REST — стиль API поверх HTTP: ресурсы — существительные в URL, действия — стандартными методами, stateless — сервер не хранит состояние клиента между запросами. GET — чтение, POST — создание, PUT/PATCH — обновление, DELETE — удаление.
+
+Идемпотентность: повтор запроса не меняет результат. GET, PUT, DELETE — идемпотентны, POST — нет (два POST — два ресурса).`,
+code:`GET    /users/42/orders     # список заказов пользователя
+POST   /users/42/orders     # создать заказ
+GET    /orders/7            # один заказ
+PATCH  /orders/7            # частично обновить
+DELETE /orders/7            # удалить`},
+
+{n:45,t:"Web",b:"B",q:"HTTP-коды: какие надо знать?",
+a:`2xx успех: 200 OK; 201 Created (после POST, обычно с заголовком Location); 204 No Content (успех без тела, после DELETE). 3xx: 301 переехало навсегда, 302 временно. 4xx ошибка клиента: 400 некорректный запрос; 401 не аутентифицирован («кто ты?»); 403 нет прав («знаю кто — нельзя»); 404 не найдено; 409 конфликт; 422 не прошла валидация (любимый код FastAPI); 429 слишком много запросов. 5xx ошибка сервера: 500 внутренняя; 502/504 — проблемы шлюза/апстрима.
+
+Пару 401 vs 403 спрашивают постоянно — отвечать без паузы.`}
+,
+{n:46,t:"Core",b:"C",q:"functools: lru_cache, partial, wraps?",
+a:`lru_cache(maxsize=...) — мемоизация: кеширует результаты по аргументам (аргументы должны быть hashable). partial фиксирует часть аргументов и возвращает новую функцию. wraps переносит метаданные оригинала в обёртку декоратора.
+
+Дополнительные очки: reduce, cache (3.9+), cached_property.`,
+code:`from functools import lru_cache, partial
+
+@lru_cache(maxsize=None)
+def fib(n):
+    return n if n < 2 else fib(n - 1) + fib(n - 2)
+
+int_from_hex = partial(int, base=16)
+int_from_hex("ff")   # 255`},
+
+{n:47,t:"Итераторы",b:"C",q:"Генератор vs list comprehension по памяти?",
+a:`[x*x for x in data] материализует весь список сразу — память O(n). (x*x for x in data) создаёт генератор — O(1) по памяти, элементы вычисляются по требованию.
+
+Правило выбора: результат нужен один раз (сумма, запись в файл, следующий шаг пайплайна) — генератор; нужны индексация, len, многократный обход — список. sum, max, any, all принимают генератор прямо без скобок: sum(x*x for x in data).`},
+
+{n:48,t:"Итераторы",b:"C",q:"itertools: что знать?",
+a:`Конструктор ленивых пайплайнов. chain — склейка нескольких итераблов; islice — срез итератора без материализации; groupby — группировка соседних элементов (вход должен быть отсортирован по ключу — про это ловят!); product, permutations, combinations — переборы; count, cycle, repeat — бесконечные последовательности.`,
+code:`from itertools import chain, groupby, islice
+
+first10 = list(islice(huge_generator(), 10))
+
+data.sort(key=lambda x: x.status)      # groupby требует сортировки!
+for status, items in groupby(data, key=lambda x: x.status):
+    print(status, len(list(items)))`},
+
+{n:49,t:"Коллекции",b:"C",q:"collections: defaultdict, Counter, namedtuple, deque?",
+a:`defaultdict(list) — при обращении к отсутствующему ключу создаёт значение фабрикой: группировки без проверок if key in d. Counter — подсчёт hashable-объектов + most_common(n). deque — двусторонняя очередь: O(1) с обоих концов (list.pop(0) — O(n)); maxlen даёт скользящее окно. namedtuple — лёгкий кортеж с именованными полями.`,
+code:`from collections import defaultdict, Counter, deque
+
+groups = defaultdict(list)
+for u in users:
+    groups[u.city].append(u)
+
+Counter("abracadabra").most_common(2)  # [('a', 5), ('b', 2)]
+
+window = deque(maxlen=1000)            # скользящее окно`},
+
+{n:50,t:"Core",b:"C",q:"Декоратор с параметрами. Как устроен?",
+a:`Три уровня: внешняя функция принимает параметры и возвращает декоратор; декоратор принимает функцию и возвращает обёртку. @retry(times=3) — сначала вызывается retry(times=3), его результат применяется как обычный декоратор.
+
+Написать такой руками — стандартная live-coding задача, тренировать до автоматизма.`,
+code:`import functools
+
+def retry(times=3, exceptions=(Exception,)):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            for attempt in range(times):
+                try:
+                    return func(*args, **kwargs)
+                except exceptions:
+                    if attempt == times - 1:
+                        raise
+        return wrapper
+    return decorator
+
+@retry(times=5, exceptions=(TimeoutError,))
+def call_api(): ...`},
+
+{n:51,t:"ООП",b:"C",q:"Метаклассы: что это, когда нужны?",
+a:`Класс — тоже объект; его создаёт метакласс (по умолчанию type). Метакласс перехватывает создание класса: можно валидировать атрибуты, автоматически регистрировать наследников, добавлять методы. Так работают модели Django ORM и ABCMeta.
+
+Зрелая позиция для собеса: «механизм понимаю; в прикладном коде почти всегда достаточно __init_subclass__ или декоратора класса» — это честно и звучит лучше, чем заученное определение.`,
+code:`class Meta(type):
+    def __new__(mcls, name, bases, ns):
+        if name != "Base" and "handle" not in ns:
+            raise TypeError(name + " должен определить handle()")
+        return super().__new__(mcls, name, bases, ns)
+
+class Base(metaclass=Meta): ...`},
+
+{n:52,t:"ООП",b:"C",q:"Дескрипторы. Как property работает под капотом?",
+a:`Дескриптор — объект уровня класса с методами __get__ / __set__ / __delete__, перехватывающий доступ к атрибуту экземпляра. Через протокол дескрипторов работают property, обычные методы (связывание self), classmethod, staticmethod, поля ORM.
+
+Деталь для плюса: data-дескриптор (есть __set__) приоритетнее __dict__ экземпляра, non-data — наоборот.`,
+code:`class Positive:
+    def __set_name__(self, owner, name):
+        self.name = name
+    def __get__(self, obj, objtype=None):
+        return obj.__dict__[self.name]
+    def __set__(self, obj, value):
+        if value <= 0:
+            raise ValueError(self.name + " должен быть > 0")
+        obj.__dict__[self.name] = value
+
+class Order:
+    amount = Positive()`},
+
+{n:53,t:"Core",b:"C",q:"Что происходит при импорте? if __name__ == \"__main__\"?",
+a:`При первом импорте модуль исполняется сверху вниз и кладётся в кеш sys.modules; повторные импорты берут из кеша — код уровня модуля выполняется один раз. __name__ равен '__main__' только при прямом запуске файла — отсюда идиома для кода, который не должен выполняться при импорте.
+
+Бонус: циклический импорт — обычно симптом плохой структуры; лечится выносом общего кода в третий модуль или импортом внутри функции.`,
+code:`# module.py
+print("выполнится один раз при первом импорте")
+
+def main(): ...
+
+if __name__ == "__main__":
+    main()    # только при: python module.py`},
+
+{n:54,t:"Core",b:"C",q:"Модуль vs пакет, __init__.py?",
+a:`Модуль — один файл .py. Пакет — каталог с модулями и __init__.py, который выполняется при импорте пакета; через него формируют публичный API (реэкспорт имён). С 3.3 существуют namespace-пакеты без __init__.py, но явный файл — норма.
+
+Абсолютные импорты (from app.services import billing) предпочтительнее относительных: читаемее и стабильнее при переносах.`},
+
+{n:55,t:"Core",b:"C",q:"Интернирование строк и малых чисел?",
+a:`CPython кеширует объекты малых целых от −5 до 256 и интернирует короткие строки, похожие на идентификаторы: одинаковые значения указывают на один объект в памяти, поэтому is для них «работает». Это деталь реализации: различается между версиями и не гарантируется. Значения сравниваем только через ==.`,
+code:`a, b = 256, 256
+a is b    # True — кеш
+a, b = 257, 257
+a is b    # False (в общем случае)`},
+
+{n:56,t:"ООП",b:"C",q:"__getattr__ vs __getattribute__, __setattr__?",
+a:`__getattribute__ вызывается на КАЖДЫЙ доступ к атрибуту — переопределять опасно: обращение к self.x внутри даёт бесконечную рекурсию (выручает object.__getattribute__ / super()). __getattr__ вызывается только когда обычный поиск атрибут НЕ нашёл — удобно для прокси, ленивых атрибутов, делегирования. __setattr__ перехватывает любое присваивание.`,
+code:`class Proxy:
+    def __init__(self, target):
+        self._target = target
+    def __getattr__(self, name):       # только для отсутствующих
+        return getattr(self._target, name)`},
+
+{n:57,t:"Коллекции",b:"C",q:"Изменение словаря или списка во время итерации?",
+a:`Добавление/удаление ключей словаря во время for по нему — RuntimeError: dictionary changed size during iteration. С set так же. Со списком ошибки не будет, но выйдет хуже: молча пропущенные элементы из-за сдвига индексов при удалении.
+
+Решения: итерироваться по копии (list(d)), собирать изменения отдельно и применять после цикла, либо строить новую коллекцию comprehension-ом.`,
+code:`d = {"a": 1, "b": 2}
+for k in list(d):          # копия ключей
+    if d[k] > 1:
+        del d[k]
+
+nums = [x for x in nums if x > 0]   # вместо remove в цикле`},
+
+{n:58,t:"Конкурентность",b:"C",q:"threading: Lock, race condition, deadlock?",
+a:`Race condition: несколько потоков читают-изменяют общие данные, результат зависит от порядка переключений — даже x += 1 не атомарен (чтение, сложение, запись). Lock защищает критическую секцию — использовать через with. RLock можно захватывать повторно из того же потока.
+
+Deadlock — два потока держат по локу и ждут лок друг друга. Профилактика: захватывать локи всегда в одном и том же порядке.`,
+code:`import threading
+
+lock = threading.Lock()
+counter = 0
+
+def worker():
+    global counter
+    for _ in range(100_000):
+        with lock:
+            counter += 1   # без лока итог непредсказуем`},
+
+{n:59,t:"Конкурентность",b:"C",q:"multiprocessing: когда оправдан, как обмениваться данными?",
+a:`Каждый процесс — свой интерпретатор и своя память: GIL не мешает, CPU-bound задачи реально параллелятся по ядрам. Цена: запуск процесса дорог, данные между процессами сериализуются через pickle — гонять большие объекты туда-обратно накладно.
+
+Инструменты: Pool.map, concurrent.futures.ProcessPoolExecutor (единый интерфейс с потоками), обмен — Queue, Pipe, Manager.`,
+code:`from concurrent.futures import ProcessPoolExecutor
+
+with ProcessPoolExecutor() as pool:
+    results = list(pool.map(heavy_compute, chunks))`},
+
+{n:60,t:"Конкурентность",b:"C",q:"asyncio: gather vs create_task. Блокирующий вызов в корутине?",
+a:`asyncio.create_task(coro) планирует корутину в фон сразу и возвращает Task. await asyncio.gather(*coros) запускает пачку и ждёт все результаты; return_exceptions=True — чтобы одна упавшая не роняла остальные.
+
+Блокирующий вызов (time.sleep, requests, тяжёлый цикл) внутри корутины замораживает ВЕСЬ event loop — встают все задачи. Лечение: async-аналоги (asyncio.sleep, aiohttp) или вынос в поток: await asyncio.to_thread(func).`,
+code:`results = await asyncio.gather(
+    fetch(u1), fetch(u2), fetch(u3),
+    return_exceptions=True,
+)
+
+data = await asyncio.to_thread(legacy_blocking_io)`},
+
+{n:61,t:"Инфра",b:"C",q:"Тесты: pytest, фикстуры, параметризация, mock?",
+a:`Фикстура — подготовка и очистка окружения (клиент API, соединение с БД); scope управляет временем жизни (function/module/session), yield-фикстура делает teardown после yield. @pytest.mark.parametrize гоняет один тест по набору данных. mock/patch подменяет внешние зависимости — тест проверяет свою логику, а не чужой API.`,
+code:`import pytest
+from unittest.mock import patch
+
+@pytest.fixture
+def client():
+    app = create_app(test=True)
+    yield app.test_client()      # после теста — teardown
+
+@pytest.mark.parametrize("raw,expected", [("1,2", [1, 2]), ("", [])])
+def test_parse(raw, expected):
+    assert parse(raw) == expected
+
+@patch("app.services.send_email")
+def test_signup(mock_send, client):
+    client.post("/signup", json={"email": "a@b.c"})
+    mock_send.assert_called_once()`},
+
+{n:62,t:"SQL",b:"C",q:"Транзакции, ACID?",
+a:`Транзакция — группа операций, выполняющаяся как единое целое. Atomicity: всё или ничего (COMMIT / ROLLBACK). Consistency: из одного согласованного состояния в другое — констрейнты не нарушаются. Isolation: параллельные транзакции не видят промежуточных состояний друг друга (степень задаётся уровнем изоляции). Durability: после COMMIT данные переживут сбой.
+
+Готовый пример — перевод денег: два UPDATE в одной транзакции.`,
+code:`BEGIN;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT;   -- или ROLLBACK при ошибке`},
+
+{n:63,t:"SQL",b:"C",q:"Уровни изоляции транзакций?",
+a:`От слабого к строгому: Read Uncommitted → Read Committed → Repeatable Read → Serializable. Аномалии, которые они по очереди устраняют: грязное чтение (видно незакоммиченные изменения), неповторяющееся чтение (два одинаковых SELECT в одной транзакции дали разное), фантомы (появились новые строки под условие выборки). Чем строже уровень — тем меньше параллелизм.
+
+В PostgreSQL по умолчанию Read Committed; грязное чтение в PG невозможно ни на каком уровне.`},
+
+{n:64,t:"SQL",b:"C",q:"Первичный и внешний ключ, нормализация?",
+a:`Первичный ключ (PK) — уникальный не-NULL идентификатор строки. Внешний ключ (FK) — колонка, ссылающаяся на PK другой таблицы; база следит за целостностью: нельзя создать заказ несуществующего пользователя (поведение при удалении — ON DELETE CASCADE / RESTRICT / SET NULL).
+
+Нормализация — устранение дублирования: 1НФ — атомарные значения, 2НФ — зависимость от всего ключа, 3НФ — нет транзитивных зависимостей. На практике проектируют до 3НФ, денормализуют осознанно ради скорости чтения.`},
+
+{n:65,t:"SQL",b:"C",q:"ORM vs сырой SQL. SQLAlchemy session?",
+a:`ORM: скорость разработки, защита от инъекций, миграции, единый стиль. Минусы: неявные запросы (N+1), сложная аналитика пишется тяжело, SQL всё равно надо понимать. Зрелый ответ: ORM для CRUD, сырой SQL для сложных отчётов — они прекрасно сочетаются.
+
+SQLAlchemy: Session — unit of work, копит изменения до flush/commit; запросы ленивы; стандартный паттерн — session per request.`,
+code:`from sqlalchemy import select
+
+async with async_session() as session:
+    result = await session.execute(
+        select(User).where(User.age >= 18).order_by(User.name)
+    )
+    users = result.scalars().all()`},
+
+{n:66,t:"SQL",b:"C",q:"Миграции (Alembic / Django migrations): зачем?",
+a:`Миграции — версионирование схемы БД кодом: каждое изменение (таблица, колонка, индекс) — отдельный файл с upgrade и downgrade. Даёт историю изменений, воспроизводимость на всех окружениях и откат.
+
+Alembic: revision --autogenerate сравнивает модели с базой и пишет черновик — его обязательно проверять руками: переименование колонки автоген видит как drop + create, то есть потерю данных.`,
+code:`alembic revision --autogenerate -m "add orders table"
+alembic upgrade head
+alembic downgrade -1`},
+
+{n:67,t:"SQL",b:"C",q:"SQL-инъекции: что это, как защититься?",
+a:`Инъекция — пользовательский ввод попадает в текст SQL и меняет его логику; классика — строка вида ' OR '1'='1. Защита: параметризованные запросы — драйвер сам экранирует значения — или ORM. Никогда не собирать SQL f-строками и конкатенацией.`,
+code:`# УЯЗВИМО:
+cur.execute(f"SELECT * FROM users WHERE name = '{name}'")
+
+# ПРАВИЛЬНО:
+cur.execute("SELECT * FROM users WHERE name = %s", (name,))`},
+
+{n:68,t:"Web",b:"C",q:"JWT vs сессии: как устроена авторизация?",
+a:`Сессии: сервер хранит состояние, клиент — только session_id в cookie. Легко отозвать; при нескольких серверах нужно общее хранилище (Redis). JWT: подписанный токен header.payload.signature живёт у клиента; сервер stateless — просто проверяет подпись. Отозвать до истечения сложно (нужен blacklist). Стандартная схема: короткоживущий access (минуты) + refresh (дни).
+
+Важно проговорить: payload JWT только закодирован base64, НЕ зашифрован — секреты туда не кладут.`},
+
+{n:69,t:"Web",b:"C",q:"PUT vs PATCH. Идемпотентность на примере?",
+a:`PUT — полная замена ресурса переданным представлением: не прислал поле — оно затрётся. PATCH — частичное обновление: меняются только присланные поля.
+
+PUT идемпотентен: повтори запрос пять раз — состояние ресурса одно и то же. POST — нет: пять повторов создадут пять ресурсов; поэтому для платежей используют idempotency keys.`},
+
+{n:70,t:"Инфра",b:"C",q:"Docker: контейнер vs VM, image / container / Dockerfile?",
+a:`Контейнер — изолированный процесс, разделяющий ядро с хостом (namespaces + cgroups): стартует за секунды, весит мегабайты — в отличие от VM с целой гостевой ОС. Image — неизменяемый слоёный шаблон, описывается Dockerfile; container — запущенный экземпляр image.
+
+Слои кешируются, поэтому порядок инструкций важен: зависимости ставим ДО копирования кода — тогда правка кода не пересобирает pip install.`,
+code:`FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0"]`}
+,
+{n:71,t:"Инфра",b:"D",q:"Git: merge vs rebase, stash, revert vs reset?",
+a:`merge соединяет ветки merge-коммитом: история честная, но ветвистая. rebase переписывает твои коммиты поверх целевой ветки: линейная история, но новые хеши — нельзя ребейзить ветки, которые уже запушены и используются другими.
+
+reset двигает указатель ветки (--soft / --mixed / --hard), переписывая историю; revert создаёт новый коммит-отмену — безопасен на общих ветках. stash — отложить незакоммиченные правки.`,
+code:`git stash && git pull --rebase && git stash pop
+git revert abc123         # безопасная отмена в main
+git reset --hard HEAD~1   # снести последний коммит (только локально!)`},
+
+{n:72,t:"Web",b:"D",q:"Почему FastAPI быстрый? Pydantic — зачем?",
+a:`FastAPI быстрый за счёт ASGI/Starlette (асинхронная обработка соединений) и pydantic v2 с ядром на Rust (валидация). Pydantic-модели описывают схему запроса и ответа обычными type hints: автоматическая валидация входа (при ошибке — 422 с деталями), сериализация и генерация OpenAPI-доки (/docs) бесплатно.`,
+code:`from fastapi import FastAPI
+from pydantic import BaseModel, Field
+
+app = FastAPI()
+
+class OrderIn(BaseModel):
+    amount: float = Field(gt=0)
+    currency: str = "RUB"
+
+@app.post("/orders", status_code=201)
+async def create_order(order: OrderIn):
+    return {"id": 1, **order.model_dump()}`},
+
+{n:73,t:"Web",b:"D",q:"Django ORM: ленивость QuerySet, select_related vs prefetch_related?",
+a:`QuerySet ленив: строится цепочкой (filter, exclude, order_by), а SQL уходит в базу только при итерации, len(), list(). select_related("user") — SQL JOIN, для ForeignKey и OneToOne. prefetch_related("tags") — отдельный запрос + склейка в Python, для ManyToMany и обратных связей.
+
+Дополнительные очки: only/defer, values, annotate, exists() вместо len(qs) > 0.`,
+code:`orders = (Order.objects
+          .filter(status="paid")
+          .select_related("user")        # JOIN
+          .prefetch_related("items"))    # второй запрос`},
+
+{n:74,t:"Web",b:"D",q:"Middleware. Dependency Injection в FastAPI?",
+a:`Middleware — слой, через который проходит каждый запрос и ответ: логирование, аутентификация, CORS, метрики, глобальная обработка ошибок.
+
+В FastAPI зависимость Depends(...) вычисляется на каждый запрос и внедряется в хендлер: сессия БД, текущий пользователь, параметры пагинации. Тестировать удобно через dependency_overrides — подменяешь зависимость мок-версией.`,
+code:`from fastapi import Depends
+
+async def get_db():
+    async with async_session() as session:
+        yield session
+
+async def current_user(token=Depends(oauth2), db=Depends(get_db)):
+    return await auth(db, token)
+
+@app.get("/me")
+async def me(user=Depends(current_user)):
+    return user`},
+
+{n:75,t:"Web",b:"D",q:"WSGI vs ASGI?",
+a:`WSGI — синхронный интерфейс между веб-сервером и приложением (Flask, классический Django; серверы gunicorn, uWSGI): один запрос занимает воркер целиком до конца обработки. ASGI — асинхронный преемник (FastAPI, Django 3+; серверы uvicorn, hypercorn): воркер обслуживает много соединений конкурентно и поддерживает WebSocket и долгоживущие соединения.`},
+
+{n:76,t:"ООП",b:"D",q:"Синглтон в Python: реализация, когда антипаттерн?",
+a:`Способы: через __new__ с проверкой _instance, через декоратор класса, через метакласс. Почему часто антипаттерн: скрытое глобальное состояние, неявные зависимости, тяжело тестировать (не подменишь).
+
+Питонический аргумент: «синглтон бедняка» — обычный модуль, он и так импортируется один раз. Зрелый ответ: нужен один объект — создай его в одном месте и передавай явно (DI).`,
+code:`def singleton(cls):
+    instances = {}
+    def get(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+    return get
+
+@singleton
+class Config: ...`},
+
+{n:77,t:"ООП",b:"D",q:"Паттерны: фабрика, стратегия?",
+a:`Фабрика скрывает выбор конкретного класса за одной точкой: по строке или типу возвращает нужный объект — добавление нового типа не трогает вызывающий код (принцип Open/Closed в действии). Стратегия — семейство взаимозаменяемых алгоритмов за общим интерфейсом, выбираемых на лету.
+
+Приятная деталь для интервьюера: в Python оба паттерна часто вырождаются в словарь «ключ → класс/функция».`,
+code:`PAYMENTS = {"card": CardPayment, "sbp": SBPPayment, "crypto": CryptoPayment}
+
+def create_payment(kind: str, **data) -> PaymentMethod:
+    try:
+        return PAYMENTS[kind](**data)
+    except KeyError:
+        raise ValueError("unknown payment type: " + kind)`},
+
+{n:78,t:"ООП",b:"D",q:"SOLID с примерами на Python?",
+a:`S — Single Responsibility: у класса одна причина меняться (парсинг отдельно от сохранения). O — Open/Closed: открыт для расширения, закрыт для модификации — новый способ оплаты это новый класс, а не новый if в старом коде. L — Liskov: наследник подставим вместо базового без сюрпризов (не сужать контракт, не бросать неожиданных исключений). I — Interface Segregation: много узких интерфейсов лучше одного толстого. D — Dependency Inversion: зависеть от абстракций — хендлер принимает PaymentMethod, а не CardPayment.
+
+Подготовь по одному примеру из СВОЕГО кода на каждую букву — это ценнее заученных определений.`},
+
+{n:79,t:"Инфра",b:"D",q:"Очереди сообщений: зачем Kafka / RabbitMQ, в чём разница?",
+a:`Зачем: асинхронная связь сервисов, сглаживание пиков нагрузки, retry, развязка отправителя и получателя.
+
+RabbitMQ — классический брокер: сообщение доставлено и подтверждено → удалено; гибкий роутинг через exchange; хорош для задач и команд. Kafka — распределённый лог: сообщения хранятся заданный срок, читатели двигают свой offset и могут перечитывать; партиции дают параллелизм и порядок внутри партиции; хороша для событий и потоков данных.`},
+
+{n:80,t:"Инфра",b:"D",q:"Celery: зачем, что такое брокер?",
+a:`Celery выносит из HTTP-цикла всё долгое: письма, отчёты, обработку изображений, периодические задачи (beat). Схема: приложение кладёт задачу в брокер (Redis или RabbitMQ) → воркеры разбирают → результат опционально в result backend.
+
+Обязательно проговорить: задачи должны быть идемпотентными (возможны повторные доставки) и принимать простые сериализуемые аргументы — id записи, а не объект.`,
+code:`@app.task(bind=True, max_retries=3)
+def send_receipt(self, order_id: int):
+    try:
+        _send(order_id)
+    except TemporaryError as exc:
+        raise self.retry(exc=exc, countdown=30)
+
+send_receipt.delay(order.id)`},
+
+{n:81,t:"Инфра",b:"D",q:"Redis: типы данных, применение?",
+a:`In-memory key-value хранилище с типами: strings (кеш, счётчики INCR), hashes (объекты), lists (очереди), sets, sorted sets (рейтинги). Персистентность опциональна (RDB-снепшоты / AOF-журнал). Команды выполняются в один поток — операции атомарны.
+
+Типовые применения: кеш с TTL, сессии, rate limiting, распределённые локи, брокер для Celery.`,
+code:`SET user:42:profile "{...}" EX 3600   # кеш на час
+INCR api:limit:42                     # счётчик запросов
+ZADD leaderboard 1500 "igor"          # рейтинг`},
+
+{n:82,t:"Инфра",b:"D",q:"Стратегии инвалидации кеша?",
+a:`Основной паттерн — cache-aside: читаем кеш → промах → идём в БД → кладём в кеш с TTL. Инвалидация: по TTL (просто, но данные могут устареть) или по событию — удалять/обновлять ключ при записи в БД.
+
+Проблемы, которые стоит назвать: устаревшие данные; cache stampede — на протухшем ключе тысяча запросов одновременно уходит в БД (лечится локом или ранним фоновым обновлением); согласованность при сложных зависимостях ключей. Классика жанра: «в CS есть две сложные вещи — инвалидация кеша и именование».`},
+
+{n:83,t:"Web",b:"D",q:"Пагинация API: offset vs cursor?",
+a:`Offset/limit: LIMIT 20 OFFSET 10000 — база всё равно перебирает 10020 строк (медленно вглубь), и страницы «едут» при вставках и удалениях. Cursor (keyset): клиент передаёт последнее увиденное значение — стабильно и быстро по индексу на любой глубине; минус — нельзя прыгнуть сразу на страницу N.`,
+code:`-- offset: просто, но медленно вглубь
+SELECT * FROM orders ORDER BY id LIMIT 20 OFFSET 10000;
+
+-- keyset: быстро на любой глубине
+SELECT * FROM orders WHERE id > 10020 ORDER BY id LIMIT 20;`},
+
+{n:84,t:"Инфра",b:"D",q:"logging: уровни, структурные логи?",
+a:`Модуль logging: иерархия логгеров (logging.getLogger(__name__)), уровни DEBUG / INFO / WARNING / ERROR / CRITICAL, хендлеры (куда писать) и форматтеры. Структурные логи (JSON) агрегируются и ищутся в ELK/Loki.
+
+Правила хорошего тона: не print; ленивая интерполяция logger.info("user %s", uid), а не f-строка; logger.exception() внутри except пишет полный трейсбек.`,
+code:`import logging
+logger = logging.getLogger(__name__)
+
+try:
+    charge(order)
+except PaymentError:
+    logger.exception("charge failed, order=%s", order.id)`},
+
+{n:85,t:"Инфра",b:"D",q:"Линтеры и форматтеры: ruff, black, mypy?",
+a:`ruff — линтер нового поколения на Rust: заменяет flake8 + isort + часть pylint, очень быстрый, умеет autofix. black — бескомпромиссный автоформат: снимает споры о стиле в ревью. mypy — статическая проверка типов по аннотациям.
+
+Всё это вешается на pre-commit хуки и в CI: ошибки ловятся до ревью и тем более до прода.`},
+
+{n:86,t:"Инфра",b:"D",q:"Виртуальные окружения, pip/poetry/uv, lock-файлы?",
+a:`venv изолирует зависимости проекта от системных и от соседних проектов. requirements.txt обычно фиксирует только прямые зависимости; lock-файл — точные версии всего дерева зависимостей: гарантия одинаковой сборки на любой машине и в CI.
+
+Современные менеджеры: poetry и uv (сверхбыстрый, на Rust) — резолвер, lock и управление окружением из коробки.`,
+code:`uv venv && source .venv/bin/activate
+uv add fastapi uvicorn
+uv lock && uv sync    # воспроизводимое окружение`},
+
+{n:87,t:"Core",b:"D",q:"Что нового в Python 3.10–3.13?",
+a:`3.10: структурный match/case, синтаксис X | Y в аннотациях. 3.11: ускорение интерпретатора ~25%, exception groups, tomllib. 3.12: новый синтаксис дженериков def f[T](x: T), снятие ограничений в f-строках. 3.13: улучшенный REPL, экспериментальные free-threaded сборка (без GIL) и JIT.
+
+Достаточно уверенно назвать по одной фиче на версию — это показывает, что следишь за языком.`},
+
+{n:88,t:"Конкурентность",b:"D",q:"PEP 703 (no-GIL): что это меняет?",
+a:`PEP 703 — сборка CPython без GIL (free-threaded), с 3.13 доступна экспериментально. Потоки смогут по-настоящему параллелить CPU-bound код без multiprocessing.
+
+Цена: небольшое замедление однопоточного кода и требование потокобезопасности от C-расширений — поэтому переход постепенный, обычная сборка остаётся дефолтом. На собесе достаточно показать, что понимаешь мотивацию и следишь за темой.`},
+
+{n:89,t:"Core",b:"D",q:"weakref: где применяются слабые ссылки?",
+a:`Слабая ссылка не увеличивает счётчик ссылок: если на объект остались только слабые ссылки — он собирается GC, а ссылка начинает возвращать None.
+
+Применения: кеши, которые не должны удерживать объекты живыми (WeakValueDictionary), наблюдатели и колбэки без утечек памяти, разрыв циклов parent ↔ child.`,
+code:`import weakref
+
+class Node: ...
+n = Node()
+r = weakref.ref(n)
+print(r())    # <Node object ...>
+del n
+print(r())    # None — объект собран`},
+
+{n:90,t:"Core",b:"D",q:"Задачки «что напечатает код»: id(), копирование, изменяемость?",
+a:`Тренировать типовые паттерны: 1) a = b = [] — одно тело, изменение видно через оба имени; 2) изменяемый дефолтный аргумент копит состояние; 3) кортеж неизменяем, но список ВНУТРИ него менять можно; 4) для списка a += мутирует общий объект, а a = a + ... создаёт новый.
+
+Отвечать, проговаривая модель: «имя указывает на объект; здесь два имени на один объект».`,
+code:`t = (1, [2, 3])
+t[1].append(4)    # ок! t == (1, [2, 3, 4])
+t[1] = [9]        # TypeError
+
+a = b = [1]
+a += [2]          # мутация: b тоже [1, 2]
+a = a + [3]       # новый объект: b остался [1, 2]`},
+
+{n:91,t:"Core",b:"D",q:"lambda в цикле и late binding — почему все выводят одно и то же?",
+a:`Замыкание захватывает переменную, а не её значение на момент создания. К моменту вызова цикл уже завершён, i равно последнему значению — все функции печатают одно и то же.
+
+Лечение: зафиксировать значение дефолтным аргументом (он вычисляется в момент создания функции) или functools.partial.`,
+code:`funcs = [lambda: i for i in range(3)]
+print([f() for f in funcs])       # [2, 2, 2] — сюрприз
+
+funcs = [lambda i=i: i for i in range(3)]
+print([f() for f in funcs])       # [0, 1, 2]`},
+
+{n:92,t:"Core",b:"D",q:"Цепочки сравнений, walrus-оператор :=?",
+a:`Сравнения сцепляются: 1 < x < 10 эквивалентно 1 < x and x < 10, причём x вычисляется один раз. Walrus := (с 3.8) присваивает внутри выражения — убирает дублирование вызова в while и comprehension. Не злоупотреблять: читаемость важнее краткости.`,
+code:`while (chunk := f.read(8192)):
+    process(chunk)
+
+if (m := re.search(pattern, line)):
+    print(m.group(1))`},
+
+{n:93,t:"Итераторы",b:"D",q:"yield from, методы генератора .close() и .throw()?",
+a:`yield from gen делегирует вложенному генератору: прозрачно пробрасывает значения, send() и исключения — вручную это цикл с кучей edge-case-ов. gen.close() бросает GeneratorExit в точку остановки — отработают finally и контекстные менеджеры внутри. gen.throw(exc) бросает произвольное исключение в точку yield — генератор может его поймать и продолжить.`,
+code:`def flatten(nested):
+    for item in nested:
+        if isinstance(item, list):
+            yield from flatten(item)
+        else:
+            yield item
+
+print(list(flatten([1, [2, [3, 4]], 5])))   # [1, 2, 3, 4, 5]`},
+
+{n:94,t:"Конкурентность",b:"D",q:"contextvars — зачем в async-коде?",
+a:`ContextVar — переменная, значение которой локально для текущей asyncio-задачи (аналог threading.local, но для корутин): каждая задача видит своё значение, await ничего не перемешивает.
+
+Типовое применение: request_id или текущий пользователь, доступные в любом месте обработки запроса без протаскивания через все аргументы; на этом строятся структурные логи с request_id.`,
+code:`from contextvars import ContextVar
+
+request_id: ContextVar[str] = ContextVar("request_id")
+
+async def handler(req):
+    request_id.set(req.headers["X-Request-ID"])
+    await process()    # где угодно глубже: request_id.get()`},
+
+{n:95,t:"Инфра",b:"D",q:"Graceful shutdown, healthcheck сервиса?",
+a:`По SIGTERM (его шлют Docker и Kubernetes перед остановкой): перестать принимать новые запросы, дождаться завершения текущих (с таймаутом), закрыть соединения с БД и брокером, выйти. Иначе — оборванные запросы и потерянные задачи.
+
+Healthcheck: liveness («жив ли процесс» — если нет, перезапустить) и readiness («готов ли принимать трафик» — если нет, убрать из балансировки) — это разные проверки, и различие любят уточнять.`},
+
+{n:96,t:"Web",b:"D",q:"Что происходит, когда вводишь URL в браузере?",
+a:`Скелет рассказа: 1) DNS — имя превращается в IP (кеши браузера и ОС → резолвер); 2) TCP-соединение (three-way handshake); 3) TLS handshake — сертификат, согласование ключей; 4) HTTP-запрос; 5) на стороне сервера: балансировщик → прокси (nginx) → приложение (uvicorn → FastAPI) → БД; 6) ответ; 7) браузер парсит HTML, догружает ресурсы, рендерит.
+
+Вопрос проверяет системность мышления: рассказывать уверенно, глубину деталей выбирать по реакции интервьюера.`},
+
+{n:97,t:"Web",b:"D",q:"CORS, rate limiting?",
+a:`CORS — политика БРАУЗЕРА: JS со страницы одного origin не получит ответ API другого origin, пока сервер не разрешит это заголовками Access-Control-Allow-*; для «непростых» запросов браузер сначала шлёт preflight OPTIONS. Важно проговорить: это защита пользователей браузера, а не защита API от ботов.
+
+Rate limiting — ограничение частоты запросов по IP или токену: алгоритмы token bucket, sliding window; реализуется на nginx или Redis-счётчиками; при превышении — 429.`},
+
+{n:98,t:"Инфра",b:"D",q:"Монолит vs микросервисы?",
+a:`Монолит: одна кодовая база и один деплой — просто разрабатывать, отлаживать, транзакции в одной БД. Боль приходит с ростом команды: релизы блокируют друг друга, масштабировать можно только целиком.
+
+Микросервисы: независимые релизы и масштабирование, изоляция сбоев; цена — сетевые вызовы, распределённые транзакции (saga), версионирование API, наблюдаемость, инфраструктура. Зрелый ответ: начинать с модульного монолита и пилить по мере роста команды.`},
+
+{n:99,t:"Инфра",b:"D",q:"CI/CD: что такое пайплайн?",
+a:`CI: на каждый push автоматически запускаются линтеры, тесты и сборка — поломка видна через минуты, а не на проде. CD: доставка/деплой собранного артефакта (обычно Docker-образа) на окружения, на прод часто с ручным подтверждением.
+
+Инструменты: GitHub Actions, GitLab CI. Типовой пайплайн: lint → test → build image → push в registry → deploy.`,
+code:`# .gitlab-ci.yml (скелет)
+stages: [lint, test, build]
+lint:
+  script: [ruff check ., black --check .]
+test:
+  script: [pytest --cov]
+build:
+  script: [docker build -t $IMAGE .]`},
+
+{n:100,t:"Софт",b:"D",q:"Вопросы по опыту: «расскажи про проект», «самая сложная задача», «почему меняешь стек»?",
+a:`Подготовь три истории по формату STAR (Situation → Task → Action → Result), по две минуты каждая: 1) главный проект — что за система, твоя зона ответственности, стек; 2) самая сложная задача — в чём была сложность, что сделал именно ты, чем измерим результат; 3) почему меняешь стек или место — без негатива о прошлом, через «куда иду», а не «откуда бегу».
+
+Репетировать вслух и с таймером. И подготовь 2–3 умных встречных вопроса о процессах и команде — «есть ли вопросы к нам?» будет обязательно.`}
+];
+
+/* ── хранилище с фолбэком: в браузере прогресс сохраняется, без localStorage живёт в памяти ── */
+const store = {
+  _mem:{},
+  get(k){ try{ return window.localStorage.getItem(k); }catch(e){ return this._mem[k] ?? null; } },
+  set(k,v){ try{ window.localStorage.setItem(k,v); }catch(e){ this._mem[k]=v; } }
+};
+
+const state = {
+  search:"",
+  topic:"all",
+  block:"all",
+  sort:"freq",
+  hideDone:false,
+  allOpen:false,
+  done:new Set(JSON.parse(store.get("py100.done") || "[]"))
+};
+
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const fmt = t => esc(t).split(/\n{2,}/).map(p=>"<p>"+p.replace(/\n/g,"<br>")+"</p>").join("");
+
+function saveDone(){ store.set("py100.done", JSON.stringify([...state.done])); }
+
+function buildChips(){
+  const bc = $("#blockChips");
+  bc.innerHTML = "";
+  bc.appendChild(makeChip("all","все","block", Q.length));
+  for(const key of ["A","B","C","D"]){
+    bc.appendChild(makeChip(key, key+" · "+BLOCKS[key].label, "block", Q.filter(x=>x.b===key).length));
+  }
+  const tc = $("#topicChips");
+  tc.innerHTML = "";
+  tc.appendChild(makeChip("all","все темы","topic", Q.length));
+  for(const t of TOPICS){
+    tc.appendChild(makeChip(t, t, "topic", Q.filter(x=>x.t===t).length));
+  }
+}
+
+function makeChip(value, label, kind, count){
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "chip" + ((state[kind]===value) ? " on" : "");
+  b.innerHTML = esc(label) + '<span class="cnt">' + count + '</span>';
+  b.addEventListener("click", ()=>{ state[kind] = value; buildChips(); render(); });
+  return b;
+}
+
+function filtered(){
+  const s = state.search.trim().toLowerCase();
+  return Q.filter(x=>{
+    if(state.topic!=="all" && x.t!==state.topic) return false;
+    if(state.block!=="all" && x.b!==state.block) return false;
+    if(state.hideDone && state.done.has(x.n)) return false;
+    if(s){
+      const hay = (x.q + " " + x.a + " " + (x.code||"") + " " + x.t).toLowerCase();
+      if(!hay.includes(s)) return false;
+    }
+    return true;
+  });
+}
+
+function render(){
+  const list = $("#list");
+  list.innerHTML = "";
+  const items = filtered();
+
+  $("#shownCount").textContent = "показано: " + items.length + " из 100";
+
+  if(items.length===0){
+    list.innerHTML = '<div class="empty">ничего не нашлось — сбрось фильтры или поменяй запрос</div>';
+    updateProgress();
+    return;
+  }
+
+  let groups;
+  if(state.sort==="topic"){
+    groups = TOPICS
+      .map(t => ({ title:t, sub:"", items: items.filter(x=>x.t===t).sort((a,b)=>a.n-b.n) }))
+      .filter(g=>g.items.length);
+  } else {
+    groups = ["A","B","C","D"]
+      .map(k => ({ title:BLOCKS[k].name+" — "+BLOCKS[k].label, sub:BLOCKS[k].sub, items: items.filter(x=>x.b===k).sort((a,b)=>a.n-b.n) }))
+      .filter(g=>g.items.length);
+  }
+
+  for(const g of groups){
+    const h = document.createElement("h2");
+    h.className = "group-head";
+    h.innerHTML = esc(g.title) + (g.sub ? ' <span class="g-sub">'+esc(g.sub)+'</span>' : "");
+    list.appendChild(h);
+
+    const ol = document.createElement("ol");
+    ol.className = "qlist";
+    for(const item of g.items) ol.appendChild(row(item));
+    list.appendChild(ol);
+  }
+  updateProgress();
+}
+
+function row(x){
+  const li = document.createElement("li");
+  li.className = "q" + (state.done.has(x.n) ? " done" : "") + (state.allOpen ? " open" : "");
+  li.innerHTML =
+    '<div class="q-num">№'+x.n+'</div>' +
+    '<div class="q-main" tabindex="0" role="button" aria-expanded="'+state.allOpen+'">' +
+      '<span class="q-text">'+esc(x.q)+'</span>' +
+      '<div class="q-meta">' +
+        '<span class="tag">'+esc(x.t)+'</span>' +
+        '<span class="stamp b'+x.b+'">'+esc(BLOCKS[x.b].label)+'</span>' +
+      '</div>' +
+      '<div class="answer"><span class="a-label">Ответ</span>' +
+        fmt(x.a) +
+        (x.code ? '<pre><code>'+esc(x.code)+'</code></pre>' : '') +
+      '</div>' +
+    '</div>' +
+    '<button class="check" type="button" aria-pressed="'+state.done.has(x.n)+'" aria-label="Отметить вопрос №'+x.n+' разобранным" title="разобрал">✓</button>';
+
+  const main = li.querySelector(".q-main");
+  const toggle = ()=>{
+    li.classList.toggle("open");
+    main.setAttribute("aria-expanded", li.classList.contains("open"));
+  };
+  main.addEventListener("click", toggle);
+  main.addEventListener("keydown", e=>{
+    if(e.key==="Enter" || e.key===" "){ e.preventDefault(); toggle(); }
+  });
+
+  li.querySelector(".check").addEventListener("click", ()=>{
+    if(state.done.has(x.n)) state.done.delete(x.n); else state.done.add(x.n);
+    saveDone();
+    if(state.hideDone){ render(); return; }
+    li.classList.toggle("done", state.done.has(x.n));
+    li.querySelector(".check").setAttribute("aria-pressed", state.done.has(x.n));
+    updateProgress();
+  });
+
+  return li;
+}
+
+function updateProgress(){
+  const d = state.done.size;
+  $("#pdone").textContent = d;
+  $("#pfill").style.width = d + "%";
+}
+
+$("#search").addEventListener("input", e=>{ state.search = e.target.value; render(); });
+$("#sort").addEventListener("change", e=>{ state.sort = e.target.value; render(); });
+$("#hideDone").addEventListener("change", e=>{ state.hideDone = e.target.checked; render(); });
+$("#expandAll").addEventListener("click", ()=>{
+  state.allOpen = !state.allOpen;
+  $("#expandAll").textContent = state.allOpen ? "свернуть все" : "развернуть все";
+  document.querySelectorAll(".q").forEach(el=>{
+    el.classList.toggle("open", state.allOpen);
+    el.querySelector(".q-main").setAttribute("aria-expanded", state.allOpen);
+  });
+});
+
+buildChips();
+render();
+
+/* ── PWA: офлайн и установка на телефон ── */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", ()=>{
+    navigator.serviceWorker.register("./sw.js").catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
